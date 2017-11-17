@@ -9,9 +9,11 @@ class BlogController extends Controller
 
 	public function listAction()
 	{
-		$posts = $this->get('doctrine')->getManager()->createQueryBuilder()->select('p')->from('BloggerBlogBundle:Post',  'p')->addOrderBy('p.categoria', 'DESC')->getQuery()->getResult();
+		$postentrante = $this->get('doctrine')->getManager()->createQueryBuilder()->select('p')->from('BloggerBlogBundle:Post',  'p')->where('p.categoria = :entrante')->setFirstResult(0)->setMaxResults(2)->addOrderBy('p.categoria', 'ASC')->setParameter('entrante', 'Entrante')->getQuery()->getResult();
+		$postprincipal = $this->get('doctrine')->getManager()->createQueryBuilder()->select('p')->from('BloggerBlogBundle:Post',  'p')->where('p.categoria = :principal')->setFirstResult(0)->setMaxResults(2)->addOrderBy('p.categoria', 'ASC')->setParameter('principal', 'Principal')->getQuery()->getResult();
+		$postpostre = $this->get('doctrine')->getManager()->createQueryBuilder()->select('p')->from('BloggerBlogBundle:Post',  'p')->where('p.categoria = :postre')->setFirstResult(0)->setMaxResults(2)->addOrderBy('p.categoria', 'ASC')->setParameter('postre', 'Postre')->getQuery()->getResult();
 
-		return $this->render('BloggerBlogBundle:Blog:list.html.twig', array('posts' => $posts));
+		return $this->render('BloggerBlogBundle:Blog:list.html.twig', array('postentrante' => $postentrante, 'postprincipal' => $postprincipal, 'postpostre' => $postpostre));
 	}
 
 	public function showAction($id)

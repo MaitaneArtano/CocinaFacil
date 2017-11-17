@@ -4,7 +4,45 @@
 
 {% block body %}
 	<h1>Recetas</h1>
-	{% for post in posts %}
+	{% for post in postentrante %}
+        <article class="post">
+            <header>
+                <h2><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">{{ post.nombre }}</a></h2>
+                <h3><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">{{ post.categoria }}</a></h3>
+            </header>
+
+            <div class="snippet">
+                <p>{{ post.descripcion(200) }}</p>
+                <p class="continue"><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">Seguir leyendo...</a></p>
+            </div>
+
+            <footer class="meta">
+                <p>Comentarios: {{ post.countComments }}</p>
+            </footer>
+        </article>
+    {% else %}
+        <p>No hay entradas en este blog</p>
+    {% endfor %}
+    {% for post in postprincipal %}
+        <article class="post">
+            <header>
+                <h2><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">{{ post.nombre }}</a></h2>
+                <h3><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">{{ post.categoria }}</a></h3>
+            </header>
+
+            <div class="snippet">
+                <p>{{ post.descripcion(200) }}</p>
+                <p class="continue"><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">Seguir leyendo...</a></p>
+            </div>
+
+            <footer class="meta">
+                <p>Comentarios: {{ post.countComments }}</p>
+            </footer>
+        </article>
+    {% else %}
+        <p>No hay entradas en este blog</p>
+    {% endfor %}
+    {% for post in postpostre %}
         <article class="post">
             <header>
                 <h2><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">{{ post.nombre }}</a></h2>
