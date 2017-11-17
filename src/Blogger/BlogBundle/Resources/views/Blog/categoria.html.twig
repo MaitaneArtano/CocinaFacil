@@ -1,0 +1,17 @@
+{# src/Blogger/BlogBundle/Resources/views/Blog/categoria.html.twig #}
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+
+{% block title %}Categorias{% endblock%}
+
+{% block body %}
+    <header>
+        <h1>Categorias</h1>
+    </header>
+
+    <p>En esta lista podeis encontrar las diferentes categorias</p>
+	<ul>
+		<li><a href="{{ path('blogger_blog_entrante')}}">Entrantes</a></li>
+		<li><a href="{{ path('blogger_blog_principal')}}">Platos principales</a></li>
+		<li><a href="{{ path('blogger_blog_postre')}}">Postres</a></li>
+	</ul>
+{% endblock %}

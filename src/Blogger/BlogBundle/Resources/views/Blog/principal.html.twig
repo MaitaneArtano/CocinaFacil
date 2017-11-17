@@ -1,10 +1,10 @@
-{# src/Blogger/BlogBundle/Resources/views/Blog/list.html.twig #}
+{# src/Blogger/BlogBundle/Resources/views/Blog/principal.html.twig #}
 {% extends "BloggerBlogBundle::layout.html.twig" %}
-{% block title %}Recetas{% endblock %}
+{% block title %}Platos Principales{% endblock %}
 
 {% block body %}
-	<h1>Recetas</h1>
-	{% for post in posts %}
+    <h1>Platos Principales</h1>
+    {% for post in posts %}
         <article class="post">
             <header>
                 <h2><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">{{ post.nombre }}</a></h2>

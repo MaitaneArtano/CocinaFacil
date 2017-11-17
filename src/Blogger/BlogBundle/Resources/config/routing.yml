@@ -10,6 +10,22 @@ blogger_blog_contact:
     path:  /contact
     defaults: { _controller: BloggerBlogBundle:Blog:contact }
 
+blogger_blog_categoria:
+    path:  /categoria
+    defaults: { _controller: BloggerBlogBundle:Blog:categoria }
+
+blogger_blog_entrante:
+    path:  /entrantes
+    defaults: { _controller: BloggerBlogBundle:Blog:entrante }
+
+blogger_blog_principal:
+    path:  /platosprincipales
+    defaults: { _controller: BloggerBlogBundle:Blog:principal }
+
+blogger_blog_postre:
+    path:  /postres
+    defaults: { _controller: BloggerBlogBundle:Blog:postre }
+
 blogger_comment_create:
     path:  /comment/{post_id}
     defaults: { _controller: BloggerBlogBundle:Comment:create }
