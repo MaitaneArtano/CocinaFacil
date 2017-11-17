@@ -1,0 +1,26 @@
+{# src/Blogger/BlogBundle/Resources/views/Blog/show.html.twig #}
+{% extends "BloggerBlogBundle::layout.html.twig" %}
+
+{% block title %}Post details{% endblock %}
+
+{% block body %}
+	<h1>{{ post.nombre }}</h1>
+	<div class="descripcion">
+		{{ post.descripcion }}
+	</div>	
+
+	<section class="comments" id="comments">
+	<section class="previous-comments">
+		<h3>Comentarios</h3>
+		{% include 'BloggerBlogBundle:Comment:list.html.twig' with { 'comments': comments } %}
+	</section>
+	<h3>Añadir comentario</h3>
+		{{ render(controller( 'BloggerBlogBundle:Comment:new', { 'post_id': post.id } )) }}
+	</section>	
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('css/blog.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
