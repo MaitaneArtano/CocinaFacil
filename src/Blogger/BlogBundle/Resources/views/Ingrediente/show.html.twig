@@ -1,0 +1,28 @@
+{# src/Blogger/BlogBundle/Resources/views/Ingrediente/show.html.twig #}
+{% extends "BloggerBlogBundle::layout.html.twig" %}
+
+{% block title %}Ingrediente details{% endblock %}
+
+{% block sidebar %}
+
+	<div class="posts">
+	<p>Esta es la lista de recetas que utilizan este ingrediente:</p>
+    <p>----------------</p>
+
+	
+	
+	</div>
+
+{% endblock %}
+
+{% block body %}
+	<h1>{{ ingrediente.nombre }}</h1>
+	<div class="descripcion">
+		{{ ingrediente.descripcion|nl2br }}
+	</div>		
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('css/blog.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}

@@ -43,7 +43,7 @@ class Post
     /**
     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
     */
-    private $comments;
+    private $comments;    
 
     /**
      * Get id
@@ -61,7 +61,6 @@ class Post
 
         $this->setDate(new \DateTime());
     }
-
     /**
      * Set categoria
      *
@@ -155,5 +154,53 @@ class Post
         return substr($this->descripcion, 0, $length) . "(...)";
         else
         return $this->descripcion;
+    }
+
+    public function __toString()
+    {
+        return $this->getNombre();
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Blogger\BlogBundle\Entity\Comment $comments
+     * @return Post
+     */
+    public function addComment(\Blogger\BlogBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Blogger\BlogBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Blogger\BlogBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Get countComments
+     *
+     * @return string
+     */
+    public function countComments()
+    {
+        return $this->comments->count();
     }
 }

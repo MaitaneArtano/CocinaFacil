@@ -1,0 +1,11 @@
+{# src/Blogger/BlogBundle/Resources/views/Ingrediente/list.html.twig #}
+
+{% for ingrediente in ingredientes %}
+
+    <p><a href="{{ path('blogger_blog_show_ingrediente', { 'id': ingrediente.id }) }}">{{ ingrediente.nombre }}</p>
+
+{% else %}
+
+    <p>Este ingrediente no se encuentra en ninguna receta</p>
+
+{% endfor %}

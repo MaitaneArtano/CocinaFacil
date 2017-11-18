@@ -12,7 +12,7 @@
             </header>
 
             <div class="snippet">
-                <p>{{ post.descripcion(200) }}</p>
+                <p>{{ post.descripcion(200)|nl2br }}</p>
                 <p class="continue"><a href="{{ path('blogger_blog_show', { 'id': post.id }) }}">Seguir leyendo...</a></p>
             </div>
 

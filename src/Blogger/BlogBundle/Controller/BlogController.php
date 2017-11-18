@@ -9,11 +9,13 @@ class BlogController extends Controller
 
 	public function listAction()
 	{
+		$posts = $this->get('doctrine')->getManager()->createQueryBuilder()->select('p')->from('BloggerBlogBundle:Post',  'p')->addOrderBy('p.nombre', 'DESC')->getQuery()->getResult();
+
 		$postentrante = $this->get('doctrine')->getManager()->createQueryBuilder()->select('p')->from('BloggerBlogBundle:Post',  'p')->where('p.categoria = :entrante')->setFirstResult(0)->setMaxResults(2)->addOrderBy('p.categoria', 'ASC')->setParameter('entrante', 'Entrante')->getQuery()->getResult();
 		$postprincipal = $this->get('doctrine')->getManager()->createQueryBuilder()->select('p')->from('BloggerBlogBundle:Post',  'p')->where('p.categoria = :principal')->setFirstResult(0)->setMaxResults(2)->addOrderBy('p.categoria', 'ASC')->setParameter('principal', 'Principal')->getQuery()->getResult();
 		$postpostre = $this->get('doctrine')->getManager()->createQueryBuilder()->select('p')->from('BloggerBlogBundle:Post',  'p')->where('p.categoria = :postre')->setFirstResult(0)->setMaxResults(2)->addOrderBy('p.categoria', 'ASC')->setParameter('postre', 'Postre')->getQuery()->getResult();
 
-		return $this->render('BloggerBlogBundle:Blog:list.html.twig', array('postentrante' => $postentrante, 'postprincipal' => $postprincipal, 'postpostre' => $postpostre));
+		return $this->render('BloggerBlogBundle:Blog:list.html.twig', array('posts' => $posts, 'postentrante' => $postentrante, 'postprincipal' => $postprincipal, 'postpostre' => $postpostre));
 	}
 
 	public function showAction($id)
@@ -26,7 +28,9 @@ class BlogController extends Controller
 
 		$comments = $this->get('doctrine')->getManager()->getRepository('BloggerBlogBundle:Comment')->getCommentsForPost($post->getId());
 
-		return $this->render('BloggerBlogBundle:Blog:show.html.twig', array('post' => $post, 'comments' => $comments));
+		$ingredientes = $post->getIngredientes();
+
+		return $this->render('BloggerBlogBundle:Blog:show.html.twig', array('post' => $post, 'comments' => $comments, 'ingredientes' => $ingredientes));
 	}
 
 	public function contactAction()
@@ -59,5 +63,11 @@ class BlogController extends Controller
 
 		return $this->render('BloggerBlogBundle:Blog:postre.html.twig', array('posts' => $posts));
 	}
-}
+
+	public function ingredienteAction($id)
+	{
+		$ingrediente = $this->get('doctrine')->getManager()->getRepository('BloggerBlogBundle:Ingrediente')->find($id);
+		return $this->render('BloggerBlogBundle:Ingrediente:show.html.twig', array('ingrediente' => $ingrediente));
+	}
+}	
 ?>

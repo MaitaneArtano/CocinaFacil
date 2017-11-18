@@ -3,14 +3,22 @@
 
 {% block title %}Post details{% endblock %}
 
+{% block sidebar %}
+
+	<div class="ingredientes">
+	<p>Esta es la lista de ingredientes de esta receta:</p>
+    <p>----------------</p>
+
+	{% include 'BloggerBlogBundle:Ingrediente:list.html.twig' with { 'ingredientes': ingredientes } %}
+	
+	</div>
+
+{% endblock %}
+
 {% block body %}
 	<h1>{{ post.nombre }}</h1>
 	<div class="descripcion">
-		{{ post.descripcion }}
-	</div>
-	
-	<div class="ingrediente">
-		{{ post.ingrediente }}
+		{{ post.descripcion|nl2br }}
 	</div>	
 
 	<section class="comments" id="comments">

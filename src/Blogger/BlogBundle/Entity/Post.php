@@ -33,17 +33,18 @@ class Post
 	/**
 	* @ORM\Column(type="text")
 	*/
-	protected $ingrediente;
-	
-	/**
-	* @ORM\Column(type="text")
-	*/
 	protected $descripcion;
 
     /**
     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
     */
-    private $comments;
+    private $comments;  
+
+     /**
+     * @ORM\ManyToMany(targetEntity="Ingrediente", inversedBy="posts")
+     * @ORM\JoinTable(name="posts_ingredientes")
+     */
+    private $ingredientes;  
 
     /**
      * Get id
@@ -58,7 +59,7 @@ class Post
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-
+        $this->ingredientes = new ArrayCollection();
         $this->setDate(new \DateTime());
     }
     /**
@@ -105,29 +106,6 @@ class Post
     public function getNombre()
     {
         return $this->nombre;
-    }
-
-    /**
-     * Set ingrediente
-     *
-     * @param string $ingrediente
-     * @return Post
-     */
-    public function setIngrediente($ingrediente)
-    {
-        $this->ingrediente = $ingrediente;
-
-        return $this;
-    }
-
-    /**
-     * Get ingrediente
-     *
-     * @return string 
-     */
-    public function getIngrediente()
-    {
-        return $this->ingrediente;
     }
 
     /**
@@ -203,4 +181,27 @@ class Post
     {
         return $this->comments->count();
     }
+
+    public function addIngrediente(\Blogger\BlogBundle\Entity\Ingrediente $ingredientes)
+    {
+        $ingredientes->addPost($this);
+        $this->ingredientes[] = $ingredientes;
+        return $this;
+    }
+
+    public function removeIngrediente(\Blogger\BlogBundle\Entity\Ingrediente $ingredientes)
+    {
+        $ingredientes->removePost($this);
+        $this->ingredientes->removeElement($ingredientes);
+    }   
+
+    /**
+     * Get ingredientes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIngredientes()
+    {
+        return $this->ingredientes;
+    }  
 }
